@@ -125,5 +125,15 @@ namespace ProductReviewManagementLINQ
                 Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Review"]},  {row["IsLike"]},  {row["Rating"]}");
             }
         }
+        public static void FindAverageOfRating(DataTable dataTable)
+        {
+            var ratingAvg = from product in dataTable.AsEnumerable() group product by product.Field<int>("ProductId")
+                            into temp select new { productid = temp.Key, average = Math.Round(temp.Average(x => x.Field<double>("Rating")), 2) };
+            
+            foreach (var row in ratingAvg)
+            {
+                Console.WriteLine("Product Id: {0} \tAverage Ratings: {1}", row.productid, row.average);
+            }
+        }
     }
 }
