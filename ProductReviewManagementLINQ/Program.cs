@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,11 @@ namespace ProductReviewManagementLINQ
             {
                 Console.WriteLine("Welcome to the Product Review Management using LINQ\n");
                 List<ProductReview> list = ProductReviewManagement.AddProductsReview();
+                DataTable table = ProductReviewManagement.CreatingDataTable();
                 Console.WriteLine("Choose Option or press 0 for exit\n1:Add review to the list\n2:Top 3 high Rated product\n" +
                     "3:Products with Rating greater than 3\n4:Count of products for each ProductID\n5:Only ProductID with Review\n" +
-                    "6:Skipping top 5 records and displaying remaining records\n7:Only Retrieving ProductID with Rating");
+                    "6:Skipping top 5 records and displaying remaining records\n7:Only Retrieving ProductID with Rating\n" +
+                    "8:Create DataTable");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -43,6 +46,9 @@ namespace ProductReviewManagementLINQ
                         break;
                     case 7:
                         ProductReviewManagement.RetrieveProductIDWithRating(list);
+                        break;
+                    case 8:
+                        ProductReviewManagement.DisplayDataTable(table);
                         break;
                 }
                 Console.ReadLine();

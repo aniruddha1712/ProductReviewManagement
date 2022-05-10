@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,38 @@ namespace ProductReviewManagementLINQ
             foreach (var item in result)
             {
                 Console.WriteLine("ProductID: " + item.ProductID + " Rating: " + item.Rating);
+            }
+        }
+        public static DataTable CreatingDataTable()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("ProductID", typeof(int));
+            dataTable.Columns.Add("UserID", typeof(int));
+            dataTable.Columns.Add("Review", typeof(string));
+            dataTable.Columns.Add("IsLike", typeof(bool));
+            dataTable.Columns.Add("Rating", typeof(double));
+
+            dataTable.Rows.Add(1, 34, "Good", true, 4.5);
+            dataTable.Rows.Add(3, 57, "Good", true, 3.9);
+            dataTable.Rows.Add(4, 56, "Average", true, 3.0);
+            dataTable.Rows.Add(7, 22, "Bad", false, 2.0);
+            dataTable.Rows.Add(8, 21, "Good", true, 4.7);
+            dataTable.Rows.Add(3, 67, "Good", true, 4.3);
+            dataTable.Rows.Add(2, 69, "Good", true, 4.4);
+            dataTable.Rows.Add(9, 13, "Bad", false, 1.5);
+            dataTable.Rows.Add(6, 81, "Average", true, 3.5);
+            dataTable.Rows.Add(5, 29, "Good", true, 4.9);
+            dataTable.Rows.Add(2, 30, "Bad", false, 2.0);
+            return dataTable;
+        }
+        public static void DisplayDataTable(DataTable dataTable)
+        {
+            dataTable = CreatingDataTable();
+            var resRows = from table in dataTable.AsEnumerable()select table;
+            Console.WriteLine($"ProductId,  UserId,  Rating,  Review,  IsLike");
+            foreach (var row in resRows)
+            {
+                Console.WriteLine($"{row["ProductId"]},  {row["UserId"]}, {row["Review"]},  {row["IsLike"]}, {row["Rating"]}");
             }
         }
     }
