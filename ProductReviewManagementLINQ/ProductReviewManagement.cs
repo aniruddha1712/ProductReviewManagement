@@ -20,6 +20,7 @@ namespace ProductReviewManagementLINQ
                 new ProductReview(){ ProductID=7,UserID=22,Review="Average",IsLike=true,Rating=3.0 },
                 new ProductReview(){ ProductID=9,UserID=11,Review="Good",IsLike=true,Rating=3.9 },
                 new ProductReview(){ ProductID=3,UserID=45,Review="Bad",IsLike=false,Rating=2.5 },
+                new ProductReview(){ ProductID=4,UserID=63,Review="Average",IsLike=false,Rating=3.1 },
                 new ProductReview(){ ProductID=6,UserID=89,Review="Good",IsLike=true,Rating=3.5 },
                 new ProductReview(){ ProductID=2,UserID=24,Review="Good",IsLike=true,Rating=4.8 },
                 new ProductReview(){ ProductID=7,UserID=10,Review="Bad",IsLike=false,Rating=2.0 }
@@ -40,6 +41,13 @@ namespace ProductReviewManagementLINQ
             var sortedProduct = from product in list orderby product.Rating descending select product;
             var top3 = sortedProduct.Take(3).ToList();
             DisplayeProductsReview(top3);
+        }
+        public static void ProductsRatingGreaterThan3(List<ProductReview> list)
+        {
+            Console.WriteLine("Retrieving products based on rating greater than 3 and having ProductID as 1/4/9");
+            var products = from product in list where (product.Rating > 3 && (product.ProductID == 1 || product.ProductID == 4 || product.ProductID == 9)) select product;
+            var listRatingGT3 = products.ToList();
+            DisplayeProductsReview(listRatingGT3);
         }
     }
 }
