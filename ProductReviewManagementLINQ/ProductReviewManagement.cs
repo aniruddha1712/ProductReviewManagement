@@ -107,12 +107,22 @@ namespace ProductReviewManagementLINQ
         }
         public static void DisplayDataTable(DataTable dataTable)
         {
-            dataTable = CreatingDataTable();
+            Console.WriteLine("Displaying reviews from datatable");
             var resRows = from table in dataTable.AsEnumerable()select table;
-            Console.WriteLine($"ProductId,  UserId,  Rating,  Review,  IsLike");
+            Console.WriteLine($"ProductId, UserId, Review, IsLike, Rating");
             foreach (var row in resRows)
             {
                 Console.WriteLine($"{row["ProductId"]},  {row["UserId"]}, {row["Review"]},  {row["IsLike"]}, {row["Rating"]}");
+            }
+        }
+        public static void RetriveRecordsWithIsLikeTrue(DataTable dataTable)
+        {
+            Console.WriteLine("Displaying reviews with IsLike value as True");
+            var resRows = from table in dataTable.AsEnumerable() where table.Field<bool>("IsLike") == true select table;
+            Console.WriteLine($"ProductId, UserId, Review, IsLike, Rating");
+            foreach (var row in resRows)
+            {
+                Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Review"]},  {row["IsLike"]},  {row["Rating"]}");
             }
         }
     }
