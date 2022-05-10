@@ -104,7 +104,11 @@ namespace ProductReviewManagementLINQ
             dataTable.Rows.Add(6, 81, "Average", true, 3.5);
             dataTable.Rows.Add(5, 29, "Good", true, 4.9);
             dataTable.Rows.Add(9, 49, "Nice", true, 4.6);
-            dataTable.Rows.Add(2, 30, "Bad", false, 2.0);
+            dataTable.Rows.Add(2, 10, "Bad", false, 2.0);
+            dataTable.Rows.Add(4, 10, "Nice", true, 4.9);
+            dataTable.Rows.Add(5, 10, "Bad", false, 2.0);
+            dataTable.Rows.Add(7, 10, "Average", true, 3.5);
+            dataTable.Rows.Add(9, 10, "Nice", true, 4.7);
             return dataTable;
         }
         public static void DisplayDataTable(DataTable dataTable)
@@ -129,6 +133,7 @@ namespace ProductReviewManagementLINQ
         }
         public static void FindAverageOfRating(DataTable dataTable)
         {
+            Console.WriteLine("Displaying Average Rating");
             var ratingAvg = from product in dataTable.AsEnumerable() group product by product.Field<int>("ProductId")
                             into temp select new { productid = temp.Key, average = Math.Round(temp.Average(x => x.Field<double>("Rating")), 2) };
             
@@ -139,9 +144,20 @@ namespace ProductReviewManagementLINQ
         }
         public static void RecordsWithNiceReview(DataTable dataTable)
         {
+            Console.WriteLine("Records with Nice review");
             var niceReview = from product in dataTable.AsEnumerable() where product.Field<string>("Review").Contains("Nice") || product.Field<string>("Review").Contains("Good") select product;
             Console.WriteLine($"ProductId, UserId, Review, IsLike, Rating");
             foreach (var row in niceReview)
+            {
+                Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Review"]},  {row["IsLike"]},  {row["Rating"]}");
+            }
+        }
+        public static void RecordsOfUserID10(DataTable dataTable)
+        {
+            Console.WriteLine("Records of UID 10 orderby rating");
+            var records = from product in dataTable.AsEnumerable() where product.Field<int>("UserID")==10 orderby product.Field<double>("Rating") select product;
+            Console.WriteLine($"ProductId, UserId, Review, IsLike, Rating");
+            foreach (var row in records)
             {
                 Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Review"]},  {row["IsLike"]},  {row["Rating"]}");
             }
