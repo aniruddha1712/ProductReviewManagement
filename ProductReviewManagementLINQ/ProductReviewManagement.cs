@@ -49,5 +49,14 @@ namespace ProductReviewManagementLINQ
             var listRatingGT3 = products.ToList();
             DisplayeProductsReview(listRatingGT3);
         }
+        public static void CountofReviewForEachProductID(List<ProductReview> list)
+        {
+            Console.WriteLine("Count of products for each ProductID");
+            var result = list.GroupBy(product => product.ProductID).Select(product => new { Id = product.Key, Count = product.Count() }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine("ProductID: "+item.Id+" Count: "+item.Count);
+            }
+        }
     }
 }
