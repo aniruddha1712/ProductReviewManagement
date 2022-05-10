@@ -58,5 +58,14 @@ namespace ProductReviewManagementLINQ
                 Console.WriteLine("ProductID: "+item.Id+" Count: "+item.Count);
             }
         }
+        public static void RetrieveProductIDWithReview(List<ProductReview> list)
+        {
+            Console.WriteLine("Only Retrieving ProductID with Review");
+            var result = list.Select(product => new { ProductID = product.ProductID, Review = product.Review }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine("ProductID: " + item.ProductID + " Review: " + item.Review);
+            }
+        }
     }
 }
