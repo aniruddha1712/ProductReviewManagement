@@ -11,6 +11,8 @@ namespace ProductReviewManagementLINQ
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Product Review Management using LINQ");
+            List<ProductReview> list = ProductReviewManagement.AddProductsReview();
+            ProductReviewManagement.DisplayeProductsReview(list);
             Console.ReadLine();
         }
     }
