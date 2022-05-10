@@ -15,7 +15,8 @@ namespace ProductReviewManagementLINQ
                 Console.WriteLine("Welcome to the Product Review Management using LINQ\n");
                 List<ProductReview> list = ProductReviewManagement.AddProductsReview();
                 Console.WriteLine("Choose Option or press 0 for exit\n1:Add review to the list\n2:Top 3 high Rated product\n" +
-                    "3:Products with Rating greater than 3\n4:Count of products for each ProductID\n5:Only ProductID with Review");
+                    "3:Products with Rating greater than 3\n4:Count of products for each ProductID\n5:Only ProductID with Review\n" +
+                    "6:Skipping top 5 records and displaying remaining records");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
@@ -36,6 +37,9 @@ namespace ProductReviewManagementLINQ
                         break;
                     case 5:
                         ProductReviewManagement.RetrieveProductIDWithReview(list);
+                        break;
+                    case 6:
+                        ProductReviewManagement.SkipTop5Records(list);
                         break;
                 }
                 Console.ReadLine();
