@@ -56,6 +56,9 @@ namespace ProductReviewManagementLINQ
                     case 10:
                         ProductReviewManagement.FindAverageOfRating(table);
                         break;
+                    case 11:
+                        ProductReviewManagement.RecordsWithNiceReview(table);
+                        break;
                 }
                 Console.ReadLine();
             }

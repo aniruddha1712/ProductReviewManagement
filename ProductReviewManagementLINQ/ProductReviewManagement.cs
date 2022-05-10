@@ -99,9 +99,11 @@ namespace ProductReviewManagementLINQ
             dataTable.Rows.Add(8, 21, "Good", true, 4.7);
             dataTable.Rows.Add(3, 67, "Good", true, 4.3);
             dataTable.Rows.Add(2, 69, "Good", true, 4.4);
+            dataTable.Rows.Add(4, 19, "Nice", true, 4.7);
             dataTable.Rows.Add(9, 13, "Bad", false, 1.5);
             dataTable.Rows.Add(6, 81, "Average", true, 3.5);
             dataTable.Rows.Add(5, 29, "Good", true, 4.9);
+            dataTable.Rows.Add(9, 49, "Nice", true, 4.6);
             dataTable.Rows.Add(2, 30, "Bad", false, 2.0);
             return dataTable;
         }
@@ -133,6 +135,15 @@ namespace ProductReviewManagementLINQ
             foreach (var row in ratingAvg)
             {
                 Console.WriteLine("Product Id: {0} \tAverage Ratings: {1}", row.productid, row.average);
+            }
+        }
+        public static void RecordsWithNiceReview(DataTable dataTable)
+        {
+            var niceReview = from product in dataTable.AsEnumerable() where product.Field<string>("Review").Contains("Nice") || product.Field<string>("Review").Contains("Good") select product;
+            Console.WriteLine($"ProductId, UserId, Review, IsLike, Rating");
+            foreach (var row in niceReview)
+            {
+                Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Review"]},  {row["IsLike"]},  {row["Rating"]}");
             }
         }
     }
